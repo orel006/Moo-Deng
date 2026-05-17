@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ของขวัญลับสำหรับเธอ</title>
+  <style>
+    :root {
+      --pink: #ff6f9f;
+      --soft-pink: #ffd6e5;
+      --blush: #fff0f5;
+      --cream: #fff7e8;
+      --white: #ffffff;
+      --red-soft: #ff8a8a;
+      --rose: #d94f79;
+      --lavender: #cdb7ff;
+      --mint: #b8f3dc;
+      --gold: #ffd36e;
+      --ink: #5d3145;
+      --muted: #8d6577;
+      --glass: rgba(255, 255, 255, 0.62);
+      --glass-strong: rgba(255, 255, 255, 0.78);
+      --shadow: 0 22px 55px rgba(220, 78, 126, 0.22);
+      --soft-shadow: 0 12px 28px rgba(183, 82, 115, 0.14);
+      --radius: 30px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(255, 214, 229, 0.9), rgba(255, 247, 232, 0.86) 42%, rgba(255, 240, 245, 0.92)),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 18px, rgba(255, 211, 110, 0.08) 18px 36px);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.52) 0 1px, transparent 2px),
+        radial-gradient(circle at 78% 28%, rgba(255, 255, 255, 0.44) 0 1px, transparent 2px),
+        radial-gradient(circle at 54% 82%, rgba(255, 255, 255, 0.5) 0 1px, transparent 2px);
+      background-size: 140px 140px, 180px 180px, 120px 120px;
+      opacity: 0.55;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .top-controls {
+      position: fixed;
+      z-index: 60;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: min(92vw, 460px);
+    }
+
+    .tiny-button,
+    .primary-button,
+    .secondary-button {
+      cursor: pointer;
+      color: var(--ink);
+      border-radius: 999px;
+      box-shadow: var(--soft-shadow);
+      transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+    }
+
+    .tiny-button {
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .primary-button,
+    .secondary-button {
+      min-height: 52px;
+      padding: 14px 24px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .primary-button {
+      background: linear-gradient(135deg, var(--pink), var(--red-soft));
+      color: var(--white);
+    }
+
+    .secondary-button {
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--rose);
+      backdrop-filter: blur(14px);
+    }
+
+    .tiny-button:hover,
+    .primary-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 18px 34px rgba(210, 70, 118, 0.22);
+    }
+
+    .tiny-button:active,
+    .primary-button:active,
+    .secondary-button:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .section {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 98px 18px 44px;
+    }
+
+    .section.active {
+      display: flex;
+      animation: fadeIn 0.68s ease both;
+    }
+
+    .content {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: var(--radius);
+      background: var(--glass);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .glass-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.1) 44%, rgba(255, 214, 229, 0.22));
+      mask-image: linear-gradient(#000, transparent 72%);
+    }
+
+    .hero-card,
+    .mission-card,
+    .question-card,
+    .letter-card,
+    .final-card {
+      padding: clamp(28px, 5vw, 56px);
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--rose);
+      font-size: 0.96rem;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(255, 111, 159, 0.12);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(2.15rem, 6vw, 5rem);
+      line-height: 1.08;
+      color: var(--rose);
+      text-wrap: balance;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.7rem, 4vw, 3.1rem);
+      line-height: 1.16;
+      color: var(--rose);
+      text-wrap: balance;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2.4vw, 1.25rem);
+      line-height: 1.78;
+    }
+
+    .gift-visual {
+      position: relative;
+      width: min(330px, 72vw);
+      height: min(250px, 54vw);
+      margin: 0 auto 28px;
+    }
+
+    .gift-box {
+      position: absolute;
+      left: 50%;
+      bottom: 14%;
+      width: 66%;
+      height: 48%;
+      transform: translateX(-50%);
+      border-radius: 22px 22px 26px 26px;
+      background: linear-gradient(135deg, #fff2f7, #ff9fbd);
+      box-shadow: 0 28px 36px rgba(207, 75, 115, 0.2);
+    }
+
+    .gift-box::before,
+    .gift-box::after {
+      content: "";
+      position: absolute;
+      background: linear-gradient(180deg, #ff5f92, #ff8a8a);
+    }
+
+    .gift-box::before {
+      left: 50%;
+      top: 0;
+      width: 22%;
+      height: 100%;
+      transform: translateX(-50%);
+    }
+
+    .gift-box::after {
+      left: -5%;
+      top: 26%;
+      width: 110%;
+      height: 22%;
+    }
+
+    .gift-lid {
+      position: absolute;
+      left: 50%;
+      bottom: 60%;
+      width: 76%;
+      height: 22%;
+      transform: translateX(-50%) rotate(-2deg);
+      transform-origin: 20% 100%;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #ffeaf2, #ff76a3);
+      box-shadow: 0 18px 28px rgba(207, 75, 115, 0.18);
+      animation: lidWiggle 2.6s ease-in-out infinite;
+    }
+
+    .gift-ribbon {
+      position: absolute;
+      left: 50%;
+      bottom: 78%;
+      width: 38%;
+      height: 30%;
+      transform: translateX(-50%);
+    }
+
+    .gift-ribbon::before,
+    .gift-ribbon::after {
+      content: "";
+      position: absolute;
+      top: 12%;
+      width: 46%;
+      height: 66%;
+      border: 12px solid var(--pink);
+      border-radius: 50% 50% 42% 50%;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .gift-ribbon::before {
+      left: 4%;
+      transform: rotate(-30deg);
+    }
+
+    .gift-ribbon::after {
+      right: 4%;
+      transform: rotate(30deg) scaleX(-1);
+    }
+
+    .gift-spark {
+      position: absolute;
+      color: var(--gold);
+      font-size: clamp(1.5rem, 5vw, 2.6rem);
+      animation: sparkle 1.8s ease-in-out infinite;
+    }
+
+    .gift-spark:nth-child(1) {
+      left: 10%;
+      top: 12%;
+      animation-delay: 0.1s;
+    }
+
+    .gift-spark:nth-child(2) {
+      right: 12%;
+      top: 20%;
+      animation-delay: 0.55s;
+    }
+
+    .gift-spark:nth-child(3) {
+      left: 28%;
+      top: 0;
+      animation-delay: 0.95s;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .progress-wrap {
+      width: min(560px, 100%);
+      margin: 20px auto 26px;
+      text-align: left;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--rose);
+      font-weight: 800;
+    }
+
+    .progress-bar {
+      height: 16px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.66);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.62);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--pink), var(--gold), var(--red-soft));
+      transition: width 0.35s ease;
+    }
+
+    .heart-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(58px, 82px));
+      justify-content: center;
+      gap: clamp(12px, 3vw, 18px);
+      margin: 20px auto 8px;
+    }
+
+    .collect-heart {
+      aspect-ratio: 1;
+      cursor: pointer;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--pink);
+      box-shadow: var(--soft-shadow);
+      font-size: clamp(2rem, 8vw, 3.2rem);
+      transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .collect-heart:hover {
+      transform: translateY(-6px) rotate(-5deg) scale(1.04);
+    }
+
+    .collect-heart.collected {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 214, 229, 0.92));
+      animation: pop 0.42s ease both;
+    }
+
+    .question-playfield {
+      position: relative;
+      min-height: 220px;
+      padding: 22px 0 6px;
+    }
+
+    .question-buttons {
+      position: static;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      min-height: 112px;
+      padding: 18px;
+      flex-wrap: wrap;
+    }
+
+    .no-button {
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--rose);
+      z-index: 2;
+    }
+
+    .no-button.is-moving {
+      position: absolute;
+      transition: left 0.2s ease, top 0.2s ease, transform 0.2s ease;
+    }
+
+    .love-meter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .envelope-stage {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      margin: 12px 0 24px;
+    }
+
+    .envelope-button {
+      position: relative;
+      width: min(330px, 78vw);
+      height: 210px;
+      cursor: pointer;
+      background: transparent;
+      transform-style: preserve-3d;
+      transition: transform 0.35s ease;
+    }
+
+    .envelope-button:hover {
+      transform: translateY(-6px) rotate(-1deg);
+    }
+
+    .envelope-body {
+      position: absolute;
+      inset: 58px 0 0;
+      border-radius: 0 0 26px 26px;
+      background: linear-gradient(135deg, #fff7fb, #ffc2d7);
+      box-shadow: 0 26px 40px rgba(213, 75, 119, 0.2);
+    }
+
+    .envelope-body::before,
+    .envelope-body::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      border-style: solid;
+      border-width: 76px 165px 76px 165px;
+    }
+
+    .envelope-body::before {
+      left: 0;
+      border-color: transparent transparent #ff97b8 transparent;
+      filter: drop-shadow(0 -3px 0 rgba(255, 255, 255, 0.3));
+    }
+
+    .envelope-body::after {
+      left: 0;
+      border-color: transparent #ffd5e3 transparent #ffdce8;
+      opacity: 0.9;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      left: 0;
+      top: 58px;
+      width: 100%;
+      height: 96px;
+      transform-origin: top center;
+      background: linear-gradient(180deg, #ff7faa, #ffc6d9);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      z-index: 4;
+      transition: transform 0.74s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .envelope-note {
+      position: absolute;
+      z-index: 2;
+      left: 9%;
+      right: 9%;
+      bottom: 34px;
+      height: 128px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fffef9, #fff4f8);
+      color: var(--rose);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: 0 14px 26px rgba(162, 66, 98, 0.12);
+      transition: transform 0.68s ease 0.18s;
+    }
+
+    .envelope-button.opened .envelope-flap {
+      transform: rotateX(178deg);
+    }
+
+    .envelope-button.opened .envelope-note {
+      z-index: 5;
+      transform: translateY(-74px);
+    }
+
+    .letter-paper {
+      display: none;
+      width: min(760px, 100%);
+      min-height: 260px;
+      margin: 0 auto 22px;
+      padding: clamp(22px, 5vw, 34px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 28px;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.78)),
+        repeating-linear-gradient(180deg, transparent 0 34px, rgba(255, 111, 159, 0.09) 34px 35px);
+      box-shadow: var(--soft-shadow);
+      color: var(--ink);
+      text-align: left;
+      line-height: 1.9;
+      font-size: clamp(1rem, 2.2vw, 1.16rem);
+    }
+
+    .letter-paper.show {
+      display: block;
+      animation: fadeIn 0.55s ease both;
+    }
+
+    .typewriter-text {
+      white-space: pre-line;
+    }
+
+    .typewriter-text.typing::after {
+      content: "▋";
+      color: var(--pink);
+      animation: typewriter 0.85s steps(2, end) infinite;
+    }
+
+    .memory-grid,
+    .coupon-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .memory-card,
+    .coupon-card {
+      min-height: 220px;
+      padding: 24px;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      background: var(--glass-strong);
+      box-shadow: var(--soft-shadow);
+      backdrop-filter: blur(16px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .memory-card {
+      transform-style: preserve-3d;
+    }
+
+    .memory-card:hover,
+    .memory-card:focus-within,
+    .memory-card.touched {
+      transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.02);
+      box-shadow: 0 24px 42px rgba(210, 70, 118, 0.2);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .memory-emoji,
+    .coupon-emoji {
+      display: inline-grid;
+      width: 62px;
+      height: 62px;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--soft-pink), var(--cream));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.64);
+      font-size: 2rem;
+    }
+
+    .memory-card h3,
+    .coupon-card h3 {
+      margin-bottom: 10px;
+      color: var(--rose);
+      font-size: 1.16rem;
+      line-height: 1.35;
+    }
+
+    .memory-card p,
+    .coupon-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .coupon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      min-height: 248px;
+    }
+
+    .coupon-card .secondary-button {
+      margin-top: auto;
+      min-height: 44px;
+      padding: 10px 16px;
+      font-size: 0.94rem;
+    }
+
+    .reason-card {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: clamp(26px, 5vw, 42px);
+      text-align: center;
+    }
+
+    .reason-output {
+      min-height: 118px;
+      display: grid;
+      place-items: center;
+      margin: 22px auto;
+      padding: 22px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--rose);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+      font-size: clamp(1.15rem, 3vw, 1.55rem);
+      font-weight: 900;
+      line-height: 1.55;
+    }
+
+    .reason-output.pop-now {
+      animation: pop 0.42s ease both;
+    }
+
+    .floating-heart {
+      position: fixed;
+      z-index: 0;
+      bottom: -42px;
+      pointer-events: none;
+      color: rgba(255, 93, 143, 0.5);
+      filter: drop-shadow(0 10px 14px rgba(255, 111, 159, 0.12));
+      animation: floatUp linear forwards;
+    }
+
+    .sparkle {
+      position: fixed;
+      z-index: 90;
+      pointer-events: none;
+      color: var(--gold);
+      font-size: 1.1rem;
+      animation: sparkle 0.82s ease forwards;
+    }
+
+    .burst-heart {
+      position: fixed;
+      z-index: 88;
+      pointer-events: none;
+      color: var(--pink);
+      animation: heartBurst 0.9s ease-out forwards;
+    }
+
+    .final-heart {
+      display: inline-grid;
+      width: clamp(126px, 26vw, 190px);
+      height: clamp(126px, 26vw, 190px);
+      place-items: center;
+      margin: 14px auto 20px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff, #ffd4e2 38%, #ff74a1 72%);
+      box-shadow: 0 30px 60px rgba(218, 67, 117, 0.26);
+      font-size: clamp(4.2rem, 13vw, 7rem);
+      animation: heartbeat 1.15s ease-in-out infinite;
+    }
+
+    .final-message {
+      min-height: 48px;
+      margin: 18px 0 0;
+      color: var(--rose);
+      font-size: clamp(1.4rem, 5vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .heart-rain {
+      position: fixed;
+      z-index: 95;
+      top: -40px;
+      pointer-events: none;
+      animation: heartRain linear forwards;
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(88, 41, 61, 0.24);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.show {
+      display: grid;
+      animation: fadeIn 0.24s ease both;
+    }
+
+    .modal-card {
+      width: min(460px, 100%);
+      padding: 32px;
+      text-align: center;
+      transform: translateY(12px);
+      animation: pop 0.34s ease both;
+    }
+
+    .modal-card h3 {
+      margin-bottom: 12px;
+      color: var(--rose);
+      font-size: 1.5rem;
+    }
+
+    .modal-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(0.82);
+      }
+      10% {
+        opacity: 0.82;
+      }
+      100% {
+        opacity: 0;
+        transform: translate3d(var(--drift), -112vh, 0) rotate(34deg) scale(1.12);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0.88);
+        opacity: 0;
+      }
+      70% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes heartbeat {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      18% {
+        transform: scale(1.1);
+      }
+      32% {
+        transform: scale(0.98);
+      }
+      48% {
+        transform: scale(1.14);
+      }
+      62% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.35) rotate(0deg);
+      }
+      45% {
+        opacity: 1;
+        transform: translate(-50%, -82%) scale(1.15) rotate(16deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -130%) scale(0.2) rotate(42deg);
+      }
+    }
+
+    @keyframes heartRain {
+      0% {
+        opacity: 0;
+        transform: translateY(-12vh) rotate(0deg) scale(0.8);
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(112vh) rotate(60deg) scale(1.1);
+      }
+    }
+
+    @keyframes typewriter {
+      0%,
+      45% {
+        opacity: 1;
+      }
+      46%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes heartBurst {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--burst-x)), calc(-50% + var(--burst-y))) scale(1.35) rotate(30deg);
+      }
+    }
+
+    @keyframes lidWiggle {
+      0%,
+      100% {
+        transform: translateX(-50%) rotate(-2deg);
+      }
+      50% {
+        transform: translateX(-50%) rotate(3deg) translateY(-4px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .memory-grid,
+      .coupon-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .heart-grid {
+        grid-template-columns: repeat(5, minmax(48px, 72px));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .section {
+        padding: 94px 14px 34px;
+      }
+
+      .top-controls {
+        left: 12px;
+        right: 12px;
+        top: 12px;
+      }
+
+      .tiny-button {
+        min-height: 38px;
+        padding: 9px 12px;
+        font-size: 0.84rem;
+      }
+
+      .hero-card,
+      .mission-card,
+      .question-card,
+      .letter-card,
+      .final-card {
+        padding: 24px 16px;
+        border-radius: 24px;
+      }
+
+      .memory-grid,
+      .coupon-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .heart-grid {
+        grid-template-columns: repeat(5, minmax(44px, 1fr));
+        gap: 8px;
+      }
+
+      .collect-heart {
+        border-radius: 18px;
+      }
+
+      .question-buttons {
+        min-height: 168px;
+      }
+
+      .primary-button,
+      .secondary-button {
+        width: 100%;
+        max-width: 310px;
+      }
+
+      .no-button.is-moving {
+        width: auto;
+        min-width: 132px;
+      }
+
+      .envelope-button {
+        height: 188px;
+      }
+
+      .envelope-body::before,
+      .envelope-body::after {
+        border-width: 68px calc(min(330px, 78vw) / 2) 68px calc(min(330px, 78vw) / 2);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top-controls" aria-label="ตัวควบคุม">
+      <button class="tiny-button" id="musicToggle" type="button">เปิดเพลง ♫</button>
+      <button class="tiny-button" id="replayTop" type="button">เล่นใหม่อีกครั้ง 💞</button>
+    </div>
+
+    <!-- ใส่ไฟล์เพลงจริงไว้โฟลเดอร์เดียวกับ love.html แล้วตั้งชื่อว่า love-song.mp3 -->
+    <audio id="bgMusic" loop preload="metadata">
+      <source src="love-song.mp3" type="audio/mpeg" />
+    </audio>
+
+    <main>
+      <section class="section active" id="welcome">
+        <div class="content">
+          <div class="glass-card hero-card">
+            <div class="gift-visual" aria-hidden="true">
+              <span class="gift-spark">✦</span>
+              <span class="gift-spark">✧</span>
+              <span class="gift-spark">✦</span>
+              <div class="gift-ribbon"></div>
+              <div class="gift-lid"></div>
+              <div class="gift-box"></div>
+            </div>
+            <p class="eyebrow">ภารกิจหัวใจเริ่มตรงนี้</p>
+            <h1 id="welcomeTitle">ของขวัญลับสำหรับเธอ 💖</h1>
+            <button class="primary-button" id="startBtn" type="button">เริ่มภารกิจ 💌</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="collect">
+        <div class="content">
+          <div class="glass-card mission-card">
+            <p class="eyebrow">ภารกิจที่ 1</p>
+            <h2>เก็บหัวใจให้ครบ 5 ดวง</h2>
+            <p class="lead">ทุกดวงเป็นความคิดถึงที่เค้าแอบเก็บไว้ให้เธอ</p>
+
+            <div class="progress-wrap" aria-live="polite">
+              <div class="progress-label">
+                <span id="heartCountText">เก็บหัวใจแล้ว 0 / 5</span>
+                <span>💗</span>
+              </div>
+              <div class="progress-bar" aria-hidden="true">
+                <div class="progress-fill" id="heartProgress"></div>
+              </div>
+            </div>
+
+            <div class="heart-grid" aria-label="หัวใจสำหรับเก็บ">
+              <button class="collect-heart" type="button" aria-label="หัวใจดวงที่ 1">🤍</button>
+              <button class="collect-heart" type="button" aria-label="หัวใจดวงที่ 2">🤍</button>
+              <button class="collect-heart" type="button" aria-label="หัวใจดวงที่ 3">🤍</button>
+              <button class="collect-heart" type="button" aria-label="หัวใจดวงที่ 4">🤍</button>
+              <button class="collect-heart" type="button" aria-label="หัวใจดวงที่ 5">🤍</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="question">
+        <div class="content">
+          <div class="glass-card question-card">
+            <p class="eyebrow">ภารกิจที่ 2</p>
+            <h2>เธอเป็นหมูเด้งมั้ย?</h2>
+            <p class="lead">คำถามนี้มีคำตอบเดียว เลือกเป็นหรือไม่เป็นก็ได้แต่มันมีแค่คำตอบเดียว</p>
+            <div class="question-playfield" id="questionPlayfield">
+              <div class="question-buttons">
+                <button class="primary-button" id="yesLoveBtn" type="button">เป็น</button>
+                <button class="secondary-button no-button" id="noLoveBtn" type="button">ไม่เป็น</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="letter">
+        <div class="content">
+          <div class="glass-card letter-card">
+            <p class="eyebrow">ภารกิจที่ 3</p>
+            <h2>เปิดจดหมายจากคนที่รักเธอที่สุด</h2>
+            <div class="envelope-stage">
+              <button class="envelope-button" id="openEnvelopeBtn" type="button" aria-label="เปิดซองจดหมาย">
+                <span class="envelope-note">กดเปิดนะ 💌</span>
+                <span class="envelope-flap"></span>
+                <span class="envelope-body"></span>
+              </button>
+            </div>
+            <div class="letter-paper" id="letterPaper">
+              <div class="typewriter-text" id="letterText"></div>
+            </div>
+            <button class="primary-button hidden" id="continueAfterLetter" type="button">อ่านต่อ 💌</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="memories">
+        <div class="content">
+          <div class="glass-card mission-card">
+            <p class="eyebrow">ภารกิจที่ 4</p>
+            <h2>กล่องความทรงจำของเรา</h2>
+            <p class="lead">บางโมเมนต์เล็กมาก แต่พอเป็นเรื่องของเธอ มันก็สำคัญขึ้นมาทันที</p>
+            <div class="memory-grid">
+              <article class="memory-card" tabindex="0">
+                <span class="memory-emoji">💬</span>
+                <h3>วันที่ได้คุยกับเธอ</h3>
+                <p>เป็นวันที่ข้อความธรรมดากลายเป็นเรื่องที่รออ่านที่สุด</p>
+              </article>
+              <article class="memory-card" tabindex="0">
+                <span class="memory-emoji">😊</span>
+                <h3>วันที่ยิ้มเพราะเธอ</h3>
+                <p>แค่คิดถึงเสียงและคำพูดของเธอ ใจก็เบาขึ้นแล้ว</p>
+              </article>
+              <article class="memory-card" tabindex="0">
+                <span class="memory-emoji">🌙</span>
+                <h3>วันที่คิดถึงเธอ</h3>
+                <p>ต่อให้วันนั้นยาวแค่ไหน ชื่อของเธอก็ยังอุ่นอยู่ในใจ</p>
+              </article>
+              <article class="memory-card" tabindex="0">
+                <span class="memory-emoji">💖</span>
+                <h3>วันที่รู้ว่าเธอพิเศษ</h3>
+                <p>เพราะเธอไม่ได้ทำให้โลกเปลี่ยนไป แต่ทำให้โลกน่าอยู่ขึ้น</p>
+              </article>
+            </div>
+            <button class="primary-button" id="goCouponsBtn" type="button">รับคูปองความรัก 💝</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="coupons">
+        <div class="content">
+          <div class="glass-card mission-card">
+            <p class="eyebrow">ภารกิจที่ 5</p>
+            <h2>คูปองความรักสำหรับเธอ</h2>
+            <p class="lead">ใช้ได้กับเราเท่านั้น และเราเต็มใจมาก ๆ</p>
+            <div class="coupon-grid">
+              <article class="coupon-card">
+                <span class="coupon-emoji">🤗</span>
+                <h3>คูปองกอดฟรี 1 ครั้ง</h3>
+                <p>กอดแน่น ๆ แบบเติมพลังใจให้เต็ม</p>
+                <button class="secondary-button coupon-btn" type="button" data-message="รับทราบค้าบ จะกอดให้อุ่นที่สุดเลย 💖">ใช้คูปองนี้</button>
+              </article>
+              <article class="coupon-card">
+                <span class="coupon-emoji">🥺</span>
+                <h3>คูปองง้อแบบเต็มใจ</h3>
+                <p>ง้อด้วยความรัก ความตั้งใจ และเสียงอ้อนนิดหน่อย</p>
+                <button class="secondary-button coupon-btn" type="button" data-message="รับทราบค้าบ จะง้อด้วยใจจนกว่าเธอจะยิ้ม 💖">ใช้คูปองนี้</button>
+              </article>
+              <article class="coupon-card">
+                <span class="coupon-emoji">🍰</span>
+                <h3>คูปองพาไปกินของอร่อย</h3>
+                <p>เลือกเมนูได้เลย คนจ่ายพร้อมมาก</p>
+                <button class="secondary-button coupon-btn" type="button" data-message="รับทราบค้าบ จะพาไปกินของอร่อยด้วยใจเลย 💖">ใช้คูปองนี้</button>
+              </article>
+              <article class="coupon-card">
+                <span class="coupon-emoji">☎️</span>
+                <h3>คูปองโทรหาได้ตอนคิดถึง</h3>
+                <p>ไม่ต้องมีเหตุผล แค่คิดถึงก็พอ</p>
+                <button class="secondary-button coupon-btn" type="button" data-message="รับทราบค้าบ คิดถึงเมื่อไหร่โทรมาได้เลยนะ 💖">ใช้คูปองนี้</button>
+              </article>
+            </div>
+            <button class="primary-button" id="goReasonBtn" type="button">ไปสุ่มเหตุผลที่รักเธอ 💕</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="reasons">
+        <div class="content">
+          <div class="glass-card reason-card">
+            <p class="eyebrow">ภารกิจที่ 6</p>
+            <h2>เหตุผลที่เรารักเธอ</h2>
+            <div class="reason-output" id="reasonOutput">กดสุ่มแล้วรับความรักหนึ่งข้อได้เลย 💕</div>
+            <div class="button-row">
+              <button class="primary-button" id="randomReasonBtn" type="button">สุ่มเหตุผลที่เรารักเธอ 💕</button>
+              <button class="secondary-button" id="goFinalBtn" type="button">ไปภารกิจสุดท้าย 💖</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="final">
+        <div class="content">
+          <div class="glass-card final-card">
+            <p class="eyebrow">ของขวัญเปิดครบแล้ว</p>
+            <h2>Mission Complete 💖</h2>
+            <p class="lead">ภารกิจสำเร็จแล้ว แต่ความรักของเรายังไม่จบนะ</p>
+            <div class="final-heart" aria-hidden="true">💗</div>
+            <button class="primary-button" id="finalHeartBtn" type="button">กดรับหัวใจดวงสุดท้าย</button>
+            <p class="final-message" id="finalLoveMessage" aria-live="polite"></p>
+            <div class="button-row">
+              <button class="secondary-button" id="replayFinal" type="button">เล่นใหม่อีกครั้ง 💞</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="couponModal" role="dialog" aria-modal="true" aria-labelledby="couponModalTitle">
+    <div class="glass-card modal-card">
+      <h3 id="couponModalTitle">คูปองถูกใช้แล้ว 💝</h3>
+      <p id="couponModalText">รับทราบค้าบ จะทำให้ด้วยใจเลย 💖</p>
+      <button class="primary-button" id="closeModalBtn" type="button">ปิดด้วยรอยยิ้ม 😊</button>
+    </div>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll(".section");
+    const welcomeTitle = document.getElementById("welcomeTitle");
+    const startBtn = document.getElementById("startBtn");
+    const heartButtons = document.querySelectorAll(".collect-heart");
+    const heartCountText = document.getElementById("heartCountText");
+    const heartProgress = document.getElementById("heartProgress");
+    const yesLoveBtn = document.getElementById("yesLoveBtn");
+    const noLoveBtn = document.getElementById("noLoveBtn");
+    const questionPlayfield = document.getElementById("questionPlayfield");
+    const openEnvelopeBtn = document.getElementById("openEnvelopeBtn");
+    const letterPaper = document.getElementById("letterPaper");
+    const letterText = document.getElementById("letterText");
+    const continueAfterLetter = document.getElementById("continueAfterLetter");
+    const goCouponsBtn = document.getElementById("goCouponsBtn");
+    const goReasonBtn = document.getElementById("goReasonBtn");
+    const randomReasonBtn = document.getElementById("randomReasonBtn");
+    const reasonOutput = document.getElementById("reasonOutput");
+    const goFinalBtn = document.getElementById("goFinalBtn");
+    const finalHeartBtn = document.getElementById("finalHeartBtn");
+    const finalLoveMessage = document.getElementById("finalLoveMessage");
+    const replayTop = document.getElementById("replayTop");
+    const replayFinal = document.getElementById("replayFinal");
+    const musicToggle = document.getElementById("musicToggle");
+    const bgMusic = document.getElementById("bgMusic");
+    const couponModal = document.getElementById("couponModal");
+    const couponModalText = document.getElementById("couponModalText");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    const visitedKey = "loveGiftVisited";
+    const maxHearts = 5;
+    let collectedHearts = 0;
+    let isTyping = false;
+    let letterWasOpened = false;
+    let musicIsPlaying = false;
+
+    const loveLetter = `จากหนุ่มเล่นเกมส์ที่โหดที่สุดและก็ที่รักเธอที่สุด
+
+เค้ารักเธอมากๆเยยยนะคั้บบ ตั้งแต่รู้จักเธอมาเธอน่ารักมากๆๆ เป็นความน่ารักความสดใสในชีวิตเค้าเเลยยย ชอบเสียงเธอชอบแก้มเธอ ชอบรอยยิ้มเธอ เอ่ออไม่รู้จะพิมพ์อะไรเยอะแยะ เพราะคำว่ารักก็แทนทุกคำไปแล้ว เค้ารักเธอและก็อยากจริงจังกับเธอไปแบบนี้เรื่อยๆนะคั้บ อะไรที่เค้าทำยังดีไม่พอหรืออะไรก็บอกเค้า เค้าก็จะพยามปรับๆมันให้เข้ากับเธอ และก็เค้าก็ยังอยากมีเธออยู่ในอนาคตตลอดปัยยจนมีเมอร์ซี่จูเนียร์
+
+ขอให้เว็บเล็ก ๆ นี้เป็นเหมือนกอดอุ่น ๆ จากความจริงใจที่เค้าทำให้เธอนะ ไว้กอดจริงตอนเจอกานนน
+และขอให้เธอรู้ไว้เสมอว่า
+เธอคือคนที่เค้ารักมากที่สุดเย้ยยยยยย💗`;
+
+    const loveReasons = [
+      "รักที่เธอเป็นเธอ",
+      "รักรอยยิ้มของเธอ",
+      "รักเวลาที่เธอใส่ใจ",
+      "รักที่เธอทำให้วันธรรมดาน่ารักขึ้น",
+      "รักทุกอย่างที่เป็นเธอ",
+      "รักเสียงของเธอเวลาหัวเราะ",
+      "รักตอนที่เธอเล่าเรื่องเล็ก ๆ ให้ฟัง",
+      "รักความอบอุ่นที่เธอมีให้",
+      "รักที่เธอทำให้เรารู้สึกเป็นคนสำคัญ",
+      "รักความน่ารักแบบไม่ต้องพยายามของเธอ",
+      "รักเวลาที่ได้คิดถึงเธอก่อนนอน",
+      "รักที่เธอทำให้ใจเราสงบ",
+      "รักความจริงใจของเธอ",
+      "รักเวลาที่เธอส่งข้อความมา",
+      "รักที่เธอทำให้เราอยากเป็นคนที่ดีขึ้น",
+      "รักแววตาของเธอ",
+      "รักความดื้อเล็ก ๆ ที่น่าเอ็นดู",
+      "รักที่มีเธออยู่ในวันของเรา",
+      "รักทุกความทรงจำที่มีเธออยู่ด้วย",
+      "รักเธอมากขึ้นทุกวันโดยไม่ต้องมีเหตุผลใหญ่โต"
+    ];
+
+    function showSection(sectionId) {
+      sections.forEach((section) => {
+        section.classList.toggle("active", section.id === sectionId);
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function createFloatingHeart() {
+      const heart = document.createElement("span");
+      const hearts = ["♡", "♥", "💗", "💖"];
+      heart.className = "floating-heart";
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.fontSize = `${Math.random() * 18 + 16}px`;
+      heart.style.animationDuration = `${Math.random() * 5 + 7}s`;
+      heart.style.setProperty("--drift", `${Math.random() * 80 - 40}px`);
+      document.body.appendChild(heart);
+
+      heart.addEventListener("animationend", () => {
+        heart.remove();
+      });
+    }
+
+    function createSparkle(x, y) {
+      for (let i = 0; i < 8; i += 1) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+        sparkle.textContent = i % 2 === 0 ? "✦" : "✧";
+        sparkle.style.left = `${x + Math.random() * 56 - 28}px`;
+        sparkle.style.top = `${y + Math.random() * 42 - 21}px`;
+        sparkle.style.animationDelay = `${i * 0.025}s`;
+        document.body.appendChild(sparkle);
+        sparkle.addEventListener("animationend", () => sparkle.remove());
+      }
+
+      for (let i = 0; i < 7; i += 1) {
+        const burst = document.createElement("span");
+        burst.className = "burst-heart";
+        burst.textContent = "💖";
+        burst.style.left = `${x}px`;
+        burst.style.top = `${y}px`;
+        burst.style.fontSize = `${Math.random() * 10 + 14}px`;
+        burst.style.setProperty("--burst-x", `${Math.random() * 150 - 75}px`);
+        burst.style.setProperty("--burst-y", `${Math.random() * 130 - 95}px`);
+        document.body.appendChild(burst);
+        burst.addEventListener("animationend", () => burst.remove());
+      }
+    }
+
+    function collectHeart(button) {
+      if (button.classList.contains("collected")) return;
+
+      button.classList.add("collected");
+      button.textContent = "💖";
+      collectedHearts += 1;
+      heartCountText.textContent = `เก็บหัวใจแล้ว ${collectedHearts} / ${maxHearts}`;
+      heartProgress.style.width = `${(collectedHearts / maxHearts) * 100}%`;
+
+      const rect = button.getBoundingClientRect();
+      createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+      if (collectedHearts === maxHearts) {
+        setTimeout(() => showSection("question"), 760);
+      }
+    }
+
+    function moveNoButton() {
+      const fieldRect = questionPlayfield.getBoundingClientRect();
+      const buttonRect = noLoveBtn.getBoundingClientRect();
+      const maxLeft = Math.max(12, fieldRect.width - buttonRect.width - 18);
+      const maxTop = Math.max(12, fieldRect.height - buttonRect.height - 18);
+      const nextLeft = Math.random() * maxLeft;
+      const nextTop = Math.random() * maxTop;
+
+      noLoveBtn.classList.add("is-moving");
+      noLoveBtn.style.left = `${nextLeft}px`;
+      noLoveBtn.style.top = `${nextTop}px`;
+      noLoveBtn.style.transform = `rotate(${Math.random() * 16 - 8}deg)`;
+    }
+
+    function typeWriter(text, element, index = 0) {
+      if (index === 0) {
+        isTyping = true;
+        element.textContent = "";
+        element.classList.add("typing");
+      }
+
+      const chars = Array.from(text);
+      element.textContent += chars[index] || "";
+
+      if (index < chars.length - 1) {
+        const delay = chars[index] === "\n" ? 120 : 34;
+        setTimeout(() => typeWriter(text, element, index + 1), delay);
+        return;
+      }
+
+      isTyping = false;
+      element.classList.remove("typing");
+      continueAfterLetter.classList.remove("hidden");
+    }
+
+    function showCouponModal(text) {
+      couponModalText.textContent = text || "รับทราบค้าบ จะทำให้ด้วยใจเลย 💖";
+      couponModal.classList.add("show");
+      closeModalBtn.focus();
+    }
+
+    function randomLoveReason() {
+      const reason = loveReasons[Math.floor(Math.random() * loveReasons.length)];
+      const rect = randomReasonBtn.getBoundingClientRect();
+      reasonOutput.textContent = reason;
+      reasonOutput.classList.remove("pop-now");
+      void reasonOutput.offsetWidth;
+      reasonOutput.classList.add("pop-now");
+      createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }
+
+    function finalHeartRain() {
+      for (let i = 0; i < 70; i += 1) {
+        const heart = document.createElement("span");
+        heart.className = "heart-rain";
+        heart.textContent = ["💖", "💗", "💕", "❤️"][Math.floor(Math.random() * 4)];
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.fontSize = `${Math.random() * 22 + 16}px`;
+        heart.style.animationDuration = `${Math.random() * 2.8 + 2.8}s`;
+        heart.style.animationDelay = `${Math.random() * 1.4}s`;
+        document.body.appendChild(heart);
+        heart.addEventListener("animationend", () => heart.remove());
+      }
+    }
+
+    function resetGame() {
+      collectedHearts = 0;
+      isTyping = false;
+      letterWasOpened = false;
+      heartCountText.textContent = `เก็บหัวใจแล้ว 0 / ${maxHearts}`;
+      heartProgress.style.width = "0%";
+      heartButtons.forEach((button) => {
+        button.classList.remove("collected");
+        button.textContent = "🤍";
+      });
+      noLoveBtn.classList.remove("is-moving");
+      noLoveBtn.removeAttribute("style");
+      openEnvelopeBtn.classList.remove("opened");
+      letterPaper.classList.remove("show");
+      letterText.textContent = "";
+      letterText.classList.remove("typing");
+      continueAfterLetter.classList.add("hidden");
+      reasonOutput.textContent = "กดสุ่มแล้วรับความรักหนึ่งข้อได้เลย 💕";
+      reasonOutput.classList.remove("pop-now");
+      finalLoveMessage.textContent = "";
+      finalHeartBtn.disabled = false;
+      setupVisitedMessage();
+      showSection("welcome");
+    }
+
+    function setupVisitedMessage() {
+      const hasVisited = localStorage.getItem(visitedKey) === "yes";
+
+      if (hasVisited) {
+        welcomeTitle.textContent = "ยินดีต้อนรับกลับมานะคนพิเศษ 💗";
+      } else {
+        welcomeTitle.textContent = "ของขวัญลับสำหรับเธอ 💖";
+        localStorage.setItem(visitedKey, "yes");
+      }
+    }
+
+    async function toggleMusic() {
+      if (musicIsPlaying) {
+        bgMusic.pause();
+        musicIsPlaying = false;
+        musicToggle.textContent = "เปิดเพลง ♫";
+        return;
+      }
+
+      musicToggle.textContent = "กำลังเปิดเพลง ♫";
+
+      try {
+        await bgMusic.play();
+        musicIsPlaying = true;
+        musicToggle.textContent = "ปิดเพลง ♫";
+      } catch (error) {
+        musicIsPlaying = false;
+        musicToggle.textContent = "ไม่พบไฟล์เพลง ♫";
+        setTimeout(() => {
+          if (!musicIsPlaying) musicToggle.textContent = "เปิดเพลง ♫";
+        }, 1600);
+      }
+    }
+
+    function bindEvents() {
+      startBtn.addEventListener("click", () => {
+        setupVisitedMessage();
+        showSection("collect");
+      });
+
+      heartButtons.forEach((button) => {
+        button.addEventListener("click", () => collectHeart(button));
+      });
+
+      noLoveBtn.addEventListener("pointerenter", (event) => {
+        if (event.pointerType === "mouse") moveNoButton();
+      });
+
+      noLoveBtn.addEventListener("pointerdown", (event) => {
+        event.preventDefault();
+        moveNoButton();
+      });
+
+      yesLoveBtn.addEventListener("click", () => {
+        const rect = yesLoveBtn.getBoundingClientRect();
+        createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        finalHeartRain();
+        setTimeout(() => showSection("letter"), 780);
+      });
+
+      openEnvelopeBtn.addEventListener("click", () => {
+        if (letterWasOpened || isTyping) return;
+        letterWasOpened = true;
+        openEnvelopeBtn.classList.add("opened");
+        const rect = openEnvelopeBtn.getBoundingClientRect();
+        createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        setTimeout(() => {
+          letterPaper.classList.add("show");
+          typeWriter(loveLetter, letterText);
+        }, 780);
+      });
+
+      continueAfterLetter.addEventListener("click", () => showSection("memories"));
+      goCouponsBtn.addEventListener("click", () => showSection("coupons"));
+      goReasonBtn.addEventListener("click", () => showSection("reasons"));
+      goFinalBtn.addEventListener("click", () => showSection("final"));
+      randomReasonBtn.addEventListener("click", randomLoveReason);
+
+      finalHeartBtn.addEventListener("click", () => {
+        finalLoveMessage.textContent = "รักเธอที่สุดเลยนะ 💗";
+        finalHeartBtn.disabled = true;
+        finalHeartRain();
+      });
+
+      document.querySelectorAll(".coupon-btn").forEach((button) => {
+        button.addEventListener("click", () => showCouponModal(button.dataset.message));
+      });
+
+      closeModalBtn.addEventListener("click", () => couponModal.classList.remove("show"));
+
+      couponModal.addEventListener("click", (event) => {
+        if (event.target === couponModal) couponModal.classList.remove("show");
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") couponModal.classList.remove("show");
+      });
+
+      document.querySelectorAll(".memory-card").forEach((card) => {
+        card.addEventListener("pointerdown", () => {
+          card.classList.add("touched");
+          setTimeout(() => card.classList.remove("touched"), 700);
+        });
+      });
+
+      musicToggle.addEventListener("click", toggleMusic);
+      replayTop.addEventListener("click", resetGame);
+      replayFinal.addEventListener("click", resetGame);
+    }
+
+    setupVisitedMessage();
+    bindEvents();
+    setInterval(createFloatingHeart, 1300);
+    setTimeout(createFloatingHeart, 400);
+  </script>
+</body>
+</html>
